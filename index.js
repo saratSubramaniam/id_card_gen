@@ -5,10 +5,10 @@ const cors = require('cors');
 var express = require('express');
 var router = express.Router();
 
-var app = express();
-app.use(cors());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb' }));
+// var app = express();
+// app.use(cors());
+// app.use(express.json({ limit: '50mb' }));
+// app.use(express.urlencoded({ limit: '50mb' }));
 
 // var server = app.listen(8081, function () {
 //     var host = server.address().address;
@@ -46,12 +46,6 @@ router.post('/send', cors(), function (req, res) {
         // console.log("PDF Buffer:-", pdfBuffer);
         res.send(pdfBuffer);
     });
-});
-
-app.post('/send', function (req, res) {
-    console.log(req);
-
-    res.end();
 });
 
 module.exports = router;
