@@ -17,7 +17,7 @@ var router = express.Router();
 // });
 
 router.get('/', (req, res) => {
-    res.render('index', { title: 'Hello World!' });
+    res.write('Hello World!');
 })
 
 router.post('/send', cors(), function (req, res) {
