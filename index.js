@@ -17,7 +17,7 @@ var server = app.listen(port, function () {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World New!');
+    res.send('Hello World Neww!');
 })
 
 app.get('/generate', (req, res) => {
