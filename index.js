@@ -18,11 +18,11 @@ var server = app.listen(port, function () {
 
 app.get('/', (req, res) => {
     res.send('Hello World Neww!');
-})
+});
 
 app.get('/generate', (req, res) => {
-    res.sendFile('form.html');
-})
+    res.sendFile('/form.html');
+});
 
 app.post('/send', (req, res) => {
     let content = fs.readFileSync("template.html", "utf8");
