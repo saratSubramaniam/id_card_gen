@@ -17,12 +17,12 @@ var server = app.listen(port, function () {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World Neww!');
-});
+    res.send('Hello World!')
+})
 
-app.get('/generate', function (req, res) {
-    res.sendFile(path.join(__dirname + '/form.html'));
-});
+app.get('/generate', (req, res) => {
+    res.sendFile(path.join(__dirname + '/form.html'))
+})
 
 app.post('/send', (req, res) => {
     let content = fs.readFileSync("template.html", "utf8");
@@ -50,4 +50,4 @@ app.post('/send', (req, res) => {
         // console.log("PDF Buffer:-", pdfBuffer);
         res.send(pdfBuffer);
     });
-});
+})
