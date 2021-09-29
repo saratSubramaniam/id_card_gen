@@ -17,7 +17,11 @@ var server = app.listen(port, function () {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World New!')
+    res.send('Hello World New!');
+})
+
+app.get('/generate', (req, res) => {
+    res.sendFile('form.html');
 })
 
 app.post('/send', (req, res) => {
