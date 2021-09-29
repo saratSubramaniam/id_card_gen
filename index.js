@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('Hello World Neww!');
 });
 
-router.get('/generate', function (req, res) {
+app.get('/generate', function (req, res) {
     res.sendFile(path.join(__dirname + '/form.html'));
 });
 
