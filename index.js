@@ -14,6 +14,10 @@ var server = app.listen(8081, function () {
     console.log("Example app listening at http://%s:%s", host, port);
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 app.post('/send', cors(), function (req, res) {
     let content = fs.readFileSync("template.html", "utf8");
     // console.log(req.body);
