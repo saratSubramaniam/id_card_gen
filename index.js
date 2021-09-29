@@ -1,10 +1,10 @@
 var html_to_pdf = require('html-pdf-node');
 var fs = require("fs");
-const cors = require('cors');
+// const cors = require('cors');
 
 var express = require('express');
 var app = express();
-app.use(cors());
+// app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
 
@@ -17,10 +17,10 @@ var server = app.listen(port, function () {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('Hello World New!')
 })
 
-app.post('/send', cors(), function (req, res) {
+app.post('/send', (req, res) => {
     let content = fs.readFileSync("template.html", "utf8");
     // console.log(req.body);
 
@@ -46,10 +46,4 @@ app.post('/send', cors(), function (req, res) {
         // console.log("PDF Buffer:-", pdfBuffer);
         res.send(pdfBuffer);
     });
-});
-
-app.post('/send', function (req, res) {
-    console.log(req);
-
-    res.end();
 });
