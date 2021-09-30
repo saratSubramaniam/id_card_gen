@@ -26,33 +26,25 @@ app.get('/generate', (req, res) => {
 })
 
 app.post('/send', (req, res) => {
-    res.send('Hello World Send!')
+    let content = fs.readFileSync("template.html", "utf8");
+
+    let newContent = content
+        .replace("PHOTO_PLACE_HOLDER", req.body.PHOTO)
+        .replace("ID_CARD_NUMBER_PLACEHOLDER", req.body.ID_CARD_NUMBER)
+        .replace("EMPLOYEE_NAME_PLACEHOLDER", req.body.EMPLOYEE_NAME)
+        .replace("ADDRESS_ONE_PLACEHOLDER", req.body.ADDRESS_ONE)
+        .replace("ADDRESS_TWO_PLACEHOLDER", req.body.ADDRESS_TWO)
+        .replace("CITY_PLACEHOLDER", req.body.CITY)
+        .replace("PIN_CODE_PLACEHOLDER", req.body.PIN_CODE)
+        .replace("CONTACT_PLACEHOLDER", req.body.CONTACT)
+        .replace("BLOOD_GROUP_PLACEHOLDER", req.body.BLOOD_GROUP);
+    fs.writeFileSync("employee.html", newContent);
+
+    let options = { format: 'A4', path: './output.pdf' };
+
+    let file = { content: fs.readFileSync("employee.html", "utf8") };
+
+    html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+        res.send(pdfBuffer);
+    });
 })
-
-// app.post('/send', (req, res) => {
-//     let content = fs.readFileSync("template.html", "utf8");
-//     // console.log(req.body);
-
-//     let newContent = content
-//         .replace("PHOTO_PLACE_HOLDER", req.body.PHOTO)
-//         .replace("ID_CARD_NUMBER_PLACEHOLDER", req.body.ID_CARD_NUMBER)
-//         .replace("EMPLOYEE_NAME_PLACEHOLDER", req.body.EMPLOYEE_NAME)
-//         .replace("ADDRESS_ONE_PLACEHOLDER", req.body.ADDRESS_ONE)
-//         .replace("ADDRESS_TWO_PLACEHOLDER", req.body.ADDRESS_TWO)
-//         .replace("CITY_PLACEHOLDER", req.body.CITY)
-//         .replace("PIN_CODE_PLACEHOLDER", req.body.PIN_CODE)
-//         .replace("CONTACT_PLACEHOLDER", req.body.CONTACT)
-//         .replace("BLOOD_GROUP_PLACEHOLDER", req.body.BLOOD_GROUP);
-//     fs.writeFileSync("employee.html", newContent);
-
-//     let options = { format: 'A4', path: './output.pdf' };
-//     // Example of options with args //
-//     // let options = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox'] };
-
-//     let file = { content: fs.readFileSync("employee.html", "utf8") };
-
-//     html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-//         // console.log("PDF Buffer:-", pdfBuffer);
-//         res.send(pdfBuffer);
-//     });
-// })
