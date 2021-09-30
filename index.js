@@ -46,6 +46,4 @@ app.post('/send', (req, res) => {
     html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
         res.send(pdfBuffer);
     });
-
-    res.send(req.body);
 })
