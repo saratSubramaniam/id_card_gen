@@ -1,4 +1,4 @@
-var html_to_pdf = require('html-pdf-node');
+// var html_to_pdf = require('html-pdf-node');
 var fs = require("fs");
 const path = require('path');
 // const cors = require('cors');
@@ -40,11 +40,13 @@ app.post('/send', (req, res) => {
         .replace("BLOOD_GROUP_PLACEHOLDER", req.body.BLOOD_GROUP);
     fs.writeFileSync("employee.html", newContent);
 
-    let options = { format: 'A4', path: './output.pdf' };
+    // let options = { format: 'A4', path: './output.pdf' };
 
-    let file = { content: fs.readFileSync("employee.html", "utf8") };
+    // let file = { content: fs.readFileSync("employee.html", "utf8") };
 
-    html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-        res.send(pdfBuffer);
-    });
+    // html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+    //     res.send(pdfBuffer);
+    // });
+
+    res.send(req.body);
 })
