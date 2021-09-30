@@ -26,7 +26,7 @@ app.get('/generate', (req, res) => {
 })
 
 app.post('/send', (req, res) => {
-    let content = fs.readFileSync("template.html", "utf8");
+    let content = fs.readFileSync(path.join(__dirname + "template.html"), "utf8");
 
     let newContent = content
         .replace("PHOTO_PLACE_HOLDER", req.body.PHOTO)
@@ -38,15 +38,14 @@ app.post('/send', (req, res) => {
         .replace("PIN_CODE_PLACEHOLDER", req.body.PIN_CODE)
         .replace("CONTACT_PLACEHOLDER", req.body.CONTACT)
         .replace("BLOOD_GROUP_PLACEHOLDER", req.body.BLOOD_GROUP);
-    fs.writeFileSync("employee.html", newContent);
+    fs.writeFileSync(path.join(__dirname + "employee.html"), newContent);
 
-    // let options = { format: 'A4', path: './output.pdf' };
+    let options = { format: 'A4', path: path.join(__dirname + 'output.pdf') };
+    let file = { content: fs.readFileSync(path.join(__dirname + "employee.html"), "utf8") };
 
-    // let file = { content: fs.readFileSync("employee.html", "utf8") };
-
-    // html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-    //     res.send(pdfBuffer);
-    // });
+    html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
+        res.send(pdfBuffer);
+    });
 
     res.send(req.body);
 })
