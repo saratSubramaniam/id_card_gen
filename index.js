@@ -40,10 +40,15 @@ app.post('/send', (req, res) => {
         .replace("BLOOD_GROUP_PLACEHOLDER", req.body.BLOOD_GROUP);
     fs.writeFileSync(path.join(__dirname + "/employee.html"), newContent);
 
-    let options = { format: 'A4', path: path.join(__dirname + '/output.pdf') };
-    let file = { content: fs.readFileSync(path.join(__dirname + "/employee.html"), "utf8") };
+    let options = {
+        format: 'A4',
+        path: './output.pdf'
+    };
+    let file = {
+        content: fs.readFileSync(path.join(__dirname + "/employee.html"), "utf8")
+    };
 
     html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-        res.send(pdfBuffer);
+        res.send(true);
     });
 })
